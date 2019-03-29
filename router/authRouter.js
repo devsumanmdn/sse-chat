@@ -78,7 +78,8 @@ authRouter.route('/login').post(async (req, res) => {
       }).lean();
     }
     if (user) {
-      const token = await getToken(user);
+      const { name, email, username, _id } = user;
+      const token = await getToken({ name, email, username, _id });
 
       res.cookie('token', token);
       res.statusCode = 200;
