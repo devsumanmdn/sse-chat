@@ -1,7 +1,7 @@
 const authRouter = require('router')();
 const JWT = require('jsonwebtoken');
 
-const Users = require('../models/users');
+const Users = require('../../../models/users');
 const { COOKIE_SECRET } = process.env;
 
 const getToken = async payload => {
@@ -30,10 +30,11 @@ authRouter.route('/signup').post(async (req, res) => {
       const user = new Users(body);
 
       // token generation
-      payload = {
-        email: body.email,
-        name: body.name,
-        username: body.username
+      const payload = {
+        _id: user._id,
+        email: user.email,
+        name: user.name,
+        username: user.username
       };
       const token = await getToken(payload);
 
@@ -96,7 +97,7 @@ authRouter.route('/login').post(async (req, res) => {
 });
 
 authRouter.route('/logout').get((req, res) => {
-  res.cookie('name', 'name');
+  res.clearCookie('token');
   res.end();
 });
 

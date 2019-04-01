@@ -1,20 +1,9 @@
-const Router = require('router');
+const apiRouter = require('router')();
 const bodyParser = require('body-parser');
-const authRouter = require('./authRouter');
-const ensureAuthenticated = require('../middlewares/ensureAuthenticated');
-
-const apiRouter = new Router();
+const v1Router = require('./v1');
 
 apiRouter.use(bodyParser.json());
 
-apiRouter.use('/auth', authRouter);
-
-apiRouter.use(ensureAuthenticated);
-apiRouter.get('/', (req, res) => {
-  console.log(req.user);
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain; charset=utf-8');
-  res.end('hi');
-});
+apiRouter.use('/v1', v1Router);
 
 module.exports = apiRouter;

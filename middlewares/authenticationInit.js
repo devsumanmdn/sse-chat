@@ -5,7 +5,7 @@ module.exports = (req, res, next) => {
   try {
     const { token } = req.cookies;
     const payload = JWT.verify(token, COOKIE_SECRET);
-    console.log({ payload });
+    // console.log({ payload });
     req.user = payload;
     req.isAuthenticated = true;
   } catch (error) {
