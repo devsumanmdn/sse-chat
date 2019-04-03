@@ -1,7 +1,7 @@
 const authRouter = require('router')();
 const JWT = require('jsonwebtoken');
 
-const Users = require('../../../models/users');
+const Users = require('../../models/users');
 const { COOKIE_SECRET } = process.env;
 
 const getToken = async payload => {

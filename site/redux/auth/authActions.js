@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Router from 'next/router';
 import {
   LOGIN_REQUEST,
   LOGIN_FAILURE,
@@ -21,7 +22,7 @@ export const signup = data => {
   return dispatch => {
     dispatch(signupRequest());
     axios({
-      url: '/api/auth/signup',
+      url: '/api/v1/auth/signup',
       method: 'post',
       data
     })
@@ -48,10 +49,10 @@ export const login = data => {
     dispatch(loginRequest());
     axios({
       method: 'post',
-      url: '/api/auth/login',
+      url: '/api/v1/auth/login',
       data
     })
-      .then(res => {
+      .then(() => {
         location.replace('/');
       })
       .catch(err => {
@@ -70,8 +71,7 @@ export const logout = data => {
       method: 'post',
       data
     })
-      .then(res => {
-        // eslint-disable-next-line no-console
+      .then(() => {
         Router.push('/');
       })
       // eslint-disable-next-line no-console
